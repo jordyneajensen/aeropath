@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Aircraft < ApplicationRecord
   validates :registration, presence: true, uniqueness: true
   validates :make_model, presence: true
@@ -16,7 +18,7 @@ class Aircraft < ApplicationRecord
             numericality: { only_integer: true, greater_than: 0 }
 
   validates :engine_type, presence: true,
-            inclusion: { in: ["Piston", "Turboprop", "Jet", "Electric"] }
+                          inclusion: { in: %w[Piston Turboprop Jet Electric] }
 
   def full_name
     "#{make_model} (#{registration})"
@@ -26,7 +28,7 @@ class Aircraft < ApplicationRecord
     number_of_engines > 1
   end
 
-  scope :multi_engine, -> { where("number_of_engines > 1") }
+  scope :multi_engine, -> { where('number_of_engines > 1') }
   scope :by_engine_type, ->(type) { where(engine_type: type) }
-  scope :newer_than, ->(year) { where("year_of_manufacture > ?", year) }
+  scope :newer_than, ->(year) { where('year_of_manufacture > ?', year) }
 end
