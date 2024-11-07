@@ -1,19 +1,24 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/aircraft.yml
+cessna_172:
+  registration: "N172TG"
+  make_model: "Cessna 172"
+  max_speed: 140
+  cruise_speed: 122
+  fuel_capacity: 56
+  empty_weight: 1640
+  max_takeoff_weight: 2450
+  year_of_manufacture: 2020
+  engine_type: "Piston"
+  number_of_engines: 1
 
-one:
-  registration: MyString
-  make_model: MyString
-  max_speed: 1.5
-  cruise_speed: 1.5
-  fuel_capacity: 1.5
-  empty_weight: 1.5
-  max_takeoff_weight: 1.5
-
-two:
-  registration: MyString
-  make_model: MyString
-  max_speed: 1.5
-  cruise_speed: 1.5
-  fuel_capacity: 1.5
-  empty_weight: 1.5
-  max_takeoff_weight: 1.5
+piper_archer:
+  registration: "N181PA"
+  make_model: "Piper Archer"
+  max_speed: 148
+  cruise_speed: 128
+  fuel_capacity: 48
+  empty_weight: 1688
+  max_takeoff_weight: 2550
+  year_of_manufacture: 2019
+  engine_type: "Piston"
+  number_of_engines: 1
