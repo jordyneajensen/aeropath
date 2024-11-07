@@ -1,0 +1,20 @@
+<% if user_signed_in? %>
+  <h1>Welcome to AeroPath, <%= current_user.full_name %></h1>
+  
+  <div class="dashboard-links">
+    <h2>Quick Links</h2>
+    <ul>
+      <li><%= link_to 'My Aircraft', aircraft_index_path %></li>
+      <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
+      <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+    </ul>
+  </div>
+<% else %>
+  <h1>Welcome to AeroPath</h1>
+  <p>Your Personal Flight Planning Assistant</p>
+  
+  <div class="auth-links">
+    <%= link_to 'Sign In', new_user_session_path, class: 'button' %>
+    <%= link_to 'Sign Up', new_user_registration_path, class: 'button' %>
+  </div>
+<% end %>
