@@ -2,9 +2,11 @@
 <html>
   <head>
     <title>AeroPath</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <%# Just the SVG favicon %>
+    <%= favicon_link_tag 'favicon.svg', type: 'image/svg+xml' %>
 
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
