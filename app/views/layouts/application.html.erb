@@ -1,28 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Aeropath" %></title>
+    <title>AeroPath</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= yield :head %>
-
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="bg-gray-50">
+    <%= render "shared/navigation" %>
+    
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      <% if notice %>
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-4">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <p class="text-blue-700"><%= notice %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      
+      <% if alert %>
+        <div class="bg-red-50 border-l-4 border-red-400 p-4 mb-4">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <p class="text-red-700"><%= alert %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
       <%= yield %>
     </main>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
   </body>
 </html>
