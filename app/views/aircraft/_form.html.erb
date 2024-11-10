@@ -1,0 +1,167 @@
+<% if aircraft.errors.any? %>
+  <div class="rounded-md bg-red-50 p-4 mb-6">
+    <div class="flex">
+      <div class="flex-shrink-0">
+        <!-- Heroicon name: mini/x-circle -->
+        <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
+        </svg>
+      </div>
+      <div class="ml-3">
+        <h3 class="text-sm font-medium text-red-800">
+          <%= pluralize(aircraft.errors.count, "error") %> prohibited this aircraft from being saved:
+        </h3>
+        <div class="mt-2 text-sm text-red-700">
+          <ul role="list" class="list-disc space-y-1 pl-5">
+            <% aircraft.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= form_with(model: aircraft, class: "space-y-8 divide-y divide-gray-200") do |f| %>
+  <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+    <!-- Basic Information -->
+    <div class="space-y-6 sm:space-y-5">
+      <div>
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Basic Information</h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">Aircraft registration and identification details.</p>
+      </div>
+
+      <div class="space-y-6 sm:space-y-5">
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+          <%= f.label :registration, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+          <div class="mt-1 sm:col-span-2 sm:mt-0">
+            <%= f.text_field :registration, 
+                class: "block w-full max-w-lg rounded-md shadow-sm sm:max-w-xs sm:text-sm #{aircraft.errors[:registration].any? ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'}" %>
+            <% if aircraft.errors[:registration].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= aircraft.errors[:registration].join(", ") %></p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+          <%= f.label :make_model, "Make/Model", class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+          <div class="mt-1 sm:col-span-2 sm:mt-0">
+            <%= f.text_field :make_model, 
+                class: "block w-full max-w-lg rounded-md shadow-sm sm:max-w-xs sm:text-sm #{aircraft.errors[:make_model].any? ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'}" %>
+            <% if aircraft.errors[:make_model].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= aircraft.errors[:make_model].join(", ") %></p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+          <%= f.label :year_of_manufacture, "Year", class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+          <div class="mt-1 sm:col-span-2 sm:mt-0">
+            <%= f.number_field :year_of_manufacture, 
+                class: "block w-full max-w-lg rounded-md shadow-sm sm:max-w-xs sm:text-sm #{aircraft.errors[:year_of_manufacture].any? ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'}" %>
+            <% if aircraft.errors[:year_of_manufacture].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= aircraft.errors[:year_of_manufacture].join(", ") %></p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+          <%= f.label :engine_type, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+          <div class="mt-1 sm:col-span-2 sm:mt-0">
+            <%= f.select :engine_type, 
+                ['Piston', 'Turboprop', 'Jet', 'Electric'],
+                { include_blank: 'Select engine type' },
+                class: "block w-full max-w-lg rounded-md shadow-sm sm:max-w-xs sm:text-sm #{aircraft.errors[:engine_type].any? ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'}" %>
+            <% if aircraft.errors[:engine_type].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= aircraft.errors[:engine_type].join(", ") %></p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+          <%= f.label :number_of_engines, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+          <div class="mt-1 sm:col-span-2 sm:mt-0">
+            <%= f.number_field :number_of_engines, min: 1,
+                class: "block w-full max-w-lg rounded-md shadow-sm sm:max-w-xs sm:text-sm #{aircraft.errors[:number_of_engines].any? ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'}" %>
+            <% if aircraft.errors[:number_of_engines].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= aircraft.errors[:number_of_engines].join(", ") %></p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Performance Specifications -->
+    <div class="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
+      <div>
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Performance Specifications</h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">Aircraft performance and capacity details.</p>
+      </div>
+
+      <div class="space-y-6 sm:space-y-5">
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+          <%= f.label :max_speed, "Maximum Speed (knots)", class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+          <div class="mt-1 sm:col-span-2 sm:mt-0">
+            <%= f.number_field :max_speed, step: 'any',
+                class: "block w-full max-w-lg rounded-md shadow-sm sm:max-w-xs sm:text-sm #{aircraft.errors[:max_speed].any? ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'}" %>
+            <% if aircraft.errors[:max_speed].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= aircraft.errors[:max_speed].join(", ") %></p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+          <%= f.label :cruise_speed, "Cruise Speed (knots)", class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+          <div class="mt-1 sm:col-span-2 sm:mt-0">
+            <%= f.number_field :cruise_speed, step: 'any',
+                class: "block w-full max-w-lg rounded-md shadow-sm sm:max-w-xs sm:text-sm #{aircraft.errors[:cruise_speed].any? ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'}" %>
+            <% if aircraft.errors[:cruise_speed].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= aircraft.errors[:cruise_speed].join(", ") %></p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+          <%= f.label :fuel_capacity, "Fuel Capacity (gallons)", class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+          <div class="mt-1 sm:col-span-2 sm:mt-0">
+            <%= f.number_field :fuel_capacity, step: 'any',
+                class: "block w-full max-w-lg rounded-md shadow-sm sm:max-w-xs sm:text-sm #{aircraft.errors[:fuel_capacity].any? ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'}" %>
+            <% if aircraft.errors[:fuel_capacity].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= aircraft.errors[:fuel_capacity].join(", ") %></p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+          <%= f.label :empty_weight, "Empty Weight (lbs)", class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+          <div class="mt-1 sm:col-span-2 sm:mt-0">
+            <%= f.number_field :empty_weight, step: 'any',
+                class: "block w-full max-w-lg rounded-md shadow-sm sm:max-w-xs sm:text-sm #{aircraft.errors[:empty_weight].any? ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'}" %>
+            <% if aircraft.errors[:empty_weight].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= aircraft.errors[:empty_weight].join(", ") %></p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+          <%= f.label :max_takeoff_weight, "Maximum Takeoff Weight (lbs)", class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+          <div class="mt-1 sm:col-span-2 sm:mt-0">
+            <%= f.number_field :max_takeoff_weight, step: 'any',
+                class: "block w-full max-w-lg rounded-md shadow-sm sm:max-w-xs sm:text-sm #{aircraft.errors[:max_takeoff_weight].any? ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'}" %>
+            <% if aircraft.errors[:max_takeoff_weight].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= aircraft.errors[:max_takeoff_weight].join(", ") %></p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt-5">
+    <div class="flex justify-end">
+      <%= link_to "Cancel", aircraft_index_path, class: "rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
+      <%= f.submit class: "ml-3 inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
+    </div>
+  </div>
+<% end %>
